@@ -23,7 +23,7 @@ $tools = array(
 	'seo-tools/jetpack-seo-titles.php',
 	'seo-tools/jetpack-seo-posts.php',
 	'simple-payments/simple-payments.php',
-	'memberships/class-jectpack-memberships.php',
+	'memberships/class-jetpack-memberships.php',
 	'verification-tools/verification-tools-utils.php',
 	'woocommerce-analytics/wp-woocommerce-analytics.php',
 	'geo-location.php',
