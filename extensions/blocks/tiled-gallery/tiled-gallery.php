@@ -11,7 +11,7 @@ if (
 	( defined( 'IS_WPCOM' ) && IS_WPCOM ) ||
 	class_exists( 'Jetpack_Photon' ) && Jetpack::is_module_active( 'photon' )
 ) {
-	jetpack_register_block_type(
+	jetpack_register_block(
 		'jetpack/tiled-gallery',
 		array(
 			'render_callback' => 'jetpack_tiled_gallery_load_block_assets',
@@ -27,12 +27,10 @@ if (
 	 * @return string
 	 */
 	function jetpack_tiled_gallery_load_block_assets( $attr, $content ) {
-		$dependencies = array(
-			'lodash',
-			'wp-i18n',
-			'wp-token-list',
+		Jetpack_Gutenberg::load_assets_as_required(
+			'tiled-gallery',
+			array( 'wp-polyfill' )
 		);
-		Jetpack_Gutenberg::load_assets_as_required( 'tiled-gallery', $dependencies );
 
 		/**
 		 * Filter the output of the Tiled Galleries content.

@@ -85,12 +85,12 @@ abstract class Jetpack_Admin_Page {
 	function admin_head() {
 		if ( isset( $_GET['configure'] ) && Jetpack::is_module( $_GET['configure'] ) && current_user_can( 'manage_options' ) ) {
 			/**
-			 * Fires in the <head> of a particular Jetpack configuation page.
+			 * Fires in the <head> of a particular Jetpack configuration page.
 			 *
 			 * The dynamic portion of the hook name, `$_GET['configure']`,
 			 * refers to the slug of module, such as 'stats', 'sso', etc.
 			 * A complete hook for the latter would be
-			 * 'jetpack_module_configuation_head_sso'.
+			 * 'jetpack_module_configuration_head_sso'.
 			 *
 			 * @since 3.0.0
 			 */
@@ -140,18 +140,6 @@ abstract class Jetpack_Admin_Page {
 		wp_enqueue_style( 'jetpack-admin', plugins_url( "css/jetpack-admin{$min}.css", JETPACK__PLUGIN_FILE ), array( 'genericons' ), JETPACK__VERSION . '-20121016' );
 		wp_style_add_data( 'jetpack-admin', 'rtl', 'replace' );
 		wp_style_add_data( 'jetpack-admin', 'suffix', $min );
-	}
-
-	/**
-	 * Checks if WordPress version is too old to have REST API.
-	 *
-	 * @since 4.3
-	 *
-	 * @return bool
-	 */
-	function is_wp_version_too_old() {
-		global $wp_version;
-		return ( ! function_exists( 'rest_api_init' ) || version_compare( $wp_version, '4.4-z', '<=' ) );
 	}
 
 	/**
@@ -244,7 +232,7 @@ abstract class Jetpack_Admin_Page {
 				padding-left: 0 !important;
 			}
 			#wpbody-content {
-				background-color: #f3f6f8;
+				background-color: #f6f6f6;
 			}
 
 			#jp-plugin-container .wrap {

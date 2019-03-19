@@ -7,7 +7,7 @@
  * @package Jetpack
  */
 
-jetpack_register_block_type(
+jetpack_register_block(
 	'jetpack/slideshow',
 	array(
 		'render_callback' => 'jetpack_slideshow_block_load_assets',
@@ -25,9 +25,8 @@ jetpack_register_block_type(
 function jetpack_slideshow_block_load_assets( $attr, $content ) {
 	$dependencies = array(
 		'lodash',
-		'wp-element',
-		'wp-i18n',
 	);
+
 	Jetpack_Gutenberg::load_assets_as_required( 'slideshow', $dependencies );
 
 	return $content;

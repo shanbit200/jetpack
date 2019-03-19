@@ -65,11 +65,9 @@ class Jetpack_RelatedPosts {
 		}
 
 		// Add Related Posts to the REST API Post response.
-		if ( function_exists( 'register_rest_field' ) ) {
-			add_action( 'rest_api_init', array( $this, 'rest_register_related_posts' ) );
-		}
+		add_action( 'rest_api_init', array( $this, 'rest_register_related_posts' ) );
 
-		jetpack_register_block_type(
+		jetpack_register_block(
 			'jetpack/related-posts',
 			array(
 				'render_callback' => array( $this, 'render_block' ),
@@ -167,7 +165,7 @@ class Jetpack_RelatedPosts {
 	 * @returns string
 	 */
 	public function filter_add_target_to_dom( $content ) {
-		if ( function_exists( 'has_block' ) && has_block( 'jetpack/related-posts', $content ) ) {
+		if ( has_block( 'jetpack/related-posts', $content ) ) {
 			return $content;
 		}
 
@@ -393,6 +391,16 @@ EOT;
 		</nav>
 		<?php
 		$html = ob_get_clean();
+
+		$target_to_dom_priority = has_filter(
+			'the_content',
+			array( $this, 'filter_add_target_to_dom' )
+		);
+		remove_filter(
+			'the_content',
+			array( $this, 'filter_add_target_to_dom' ),
+			$target_to_dom_priority
+		);
 
 		/*
 		Below is a hack to get the block content to render correctly.

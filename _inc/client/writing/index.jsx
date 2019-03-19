@@ -9,21 +9,23 @@ import { translate as __ } from 'i18n-calypso';
  * Internal dependencies
  */
 import Card from 'components/card';
-import { getModule } from 'state/modules';
 import { getSettings } from 'state/settings';
-import { userCanManageModules } from 'state/initial-state';
-import { isDevMode, isUnavailableInDevMode, isCurrentUserLinked } from 'state/connection';
-import { userCanEditPosts } from 'state/initial-state';
-import { isModuleActivated, getModuleOverride } from 'state/modules';
+import { userCanManageModules, userCanEditPosts, isAtomicSite } from 'state/initial-state';
+import {
+	isDevMode,
+	isUnavailableInDevMode,
+	isCurrentUserLinked,
+	getConnectUrl,
+} from 'state/connection';
+import { isModuleActivated, getModuleOverride, getModule } from 'state/modules';
 import { isModuleFound } from 'state/search';
-import { getConnectUrl } from 'state/connection';
 import QuerySite from 'components/data/query-site';
 import Composing from './composing';
 import CustomContentTypes from './custom-content-types';
 import ThemeEnhancements from './theme-enhancements';
 import PostByEmail from './post-by-email';
 import { Masterbar } from './masterbar';
-import { isAtomicSite } from 'state/initial-state';
+import WritingMedia from './writing-media';
 
 export class Writing extends React.Component {
 	static displayName = 'WritingSettings';
@@ -39,6 +41,7 @@ export class Writing extends React.Component {
 		};
 
 		const found = [
+			'carousel',
 			'copy-post',
 			'masterbar',
 			'markdown',
@@ -75,6 +78,7 @@ export class Writing extends React.Component {
 					className="jp-settings-description"
 				/>
 
+				{ this.props.isModuleFound( 'carousel' ) && <WritingMedia { ...commonProps } /> }
 				{ this.props.isModuleFound( 'masterbar' ) && ! this.props.masterbarIsAlwaysActive && (
 					<Masterbar connectUrl={ this.props.connectUrl } { ...commonProps } />
 				) }
